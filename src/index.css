@@ -1,0 +1,259 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215.4 16.3% 75%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 199 89% 48%;
+
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 222.2 84% 4.9%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 25%;
+    --sidebar-ring: 199 89% 48%;
+  }
+
+  body {
+    @apply bg-ios-background text-ios-gray-dark font-vazirmatn;
+    direction: rtl;
+  }
+
+  .dark body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .prompt-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:right-0 after:bg-ios-blue after:origin-bottom-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-right;
+  }
+  
+  .dark .prompt-link {
+    @apply after:bg-blue-400 text-blue-300 hover:text-blue-200;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .table-of-contents-item {
+    @apply opacity-0 animate-fade-in-left;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--animation-delay) * 0.05s);
+  }
+}
+
+@layer utilities {
+  .font-vazirmatn {
+    font-family: 'Vazirmatn', sans-serif;
+  }
+  
+  .translate-x-full {
+    transform: translateX(100%) !important;
+  }
+
+  .translate-x-0 {
+    transform: translateX(0) !important;
+  }
+}
+
+/* Custom scrollbar */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #aeb3bb;
+}
+
+.dark .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Animation keyframes */
+@keyframes fade-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile and responsive fixes */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  #sidebar-menu {
+    width: 85%;
+    max-width: 300px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark #sidebar-menu {
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Dark mode text adjustments - improved contrast */
+.dark .prose {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .prose strong {
+  color: #ffffff;
+}
+
+.dark .prose a {
+  color: #93c5fd;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #ffffff;
+}
+
+.dark .prose blockquote {
+  color: #f1f5f9;
+}
+
+.dark .prose code {
+  color: #f1f5f9;
+  background-color: rgba(71, 85, 105, 0.5);
+}
+
+.dark .prose ul,
+.dark .prose ol {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .prose hr {
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.dark .prose table {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Fix for white text on white background in dark mode */
+.dark .bg-white {
+  background-color: #1e293b;
+}
+
+.dark .text-blue-500 {
+  color: #93c5fd;
+}
+
+.dark p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Card backgrounds in dark mode */
+.dark .bg-gray-50,
+.dark .bg-gray-100,
+.dark .bg-ios-gray-light {
+  background-color: rgba(30, 41, 59, 0.7);
+}

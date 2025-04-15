@@ -1,0 +1,378 @@
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-light: #6366f1;
+  --primary-dark: #4338ca;
+  --gray-light: #f3f4f6;
+  --gray-medium: #d1d5db;
+  --gray-dark: #4b5563;
+}
+
+.dark {
+  --primary-color: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --gray-light: #1f2937;
+  --gray-medium: #4b5563;
+  --gray-dark: #d1d5db;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: right;
+  direction: rtl;
+  color: #333;
+  overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark body {
+  color: #e5e7eb;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Prevent text selection during menu interactions */
+.menu-open {
+  overflow: hidden !important;
+  touch-action: none !important;
+  position: fixed;
+  width: 100%;
+}
+
+/* Touch enhancements */
+button, 
+[role="button"], 
+a {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  touch-action: manipulation;
+}
+
+.tap-highlight-none {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active,
+[role="button"]:active {
+  transform: scale(0.98);
+}
+
+nav [role="button"], 
+nav button, 
+nav a {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Animation for table of contents items */
+.table-of-contents-item {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: fadeInRight 0.5s ease forwards;
+  animation-delay: calc(var(--animation-delay, 0) * 0.05s);
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Fix for mobile sidebar */
+@media (max-width: 768px) {
+  #sidebar-menu {
+    width: 85% !important;
+    max-width: 300px !important;
+    transform: translateX(100%) !important;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1) !important;
+    z-index: 40 !important;
+  }
+  
+  .dark #sidebar-menu {
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  #sidebar-menu.translate-x-0 {
+    transform: translateX(0) !important;
+  }
+  
+  /* Create a safe touch area for buttons */
+  button, 
+  [role="button"], 
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Fix for mobile scroll issues */
+  #sidebar-menu {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Windows specific fixes */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  #sidebar-menu {
+    position: fixed !important;
+    height: 100vh !important;
+    transform: none !important;
+    right: -100% !important;
+  }
+  
+  #sidebar-menu.translate-x-0 {
+    right: 0 !important;
+  }
+}
+
+/* Edge browser fix */
+@supports (-ms-ime-align: auto) {
+  #sidebar-menu {
+    position: fixed !important;
+    height: 100vh !important;
+    transform: none !important;
+    right: -100% !important;
+  }
+  
+  #sidebar-menu.translate-x-0 {
+    right: 0 !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-medium);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-dark);
+}
+
+/* Hover effect for cards */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Custom link styling */
+.prompt-link {
+  position: relative;
+  display: inline-block;
+}
+
+.prompt-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.prompt-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Fix image responsiveness */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+}
+
+/* Fade-in animation for images */
+img {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Improved focus styles */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+[role="button"]:focus, 
+button:focus, 
+a:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Safari and Chrome specific fix */
+@supports (-webkit-touch-callout: none) {
+  #sidebar-menu {
+    transition: transform 0.3s ease-in-out !important;
+  }
+}
+
+/* Android browser fixes */
+@supports (-webkit-appearance:none) {
+  #sidebar-menu {
+    transition: transform 0.3s ease-in-out !important;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+}
+
+/* Dark mode specific styles */
+.dark .bg-white {
+  background-color: hsl(var(--background));
+}
+
+.dark .bg-gray-50 {
+  background-color: hsl(var(--muted));
+}
+
+.dark .bg-gray-100 {
+  background-color: hsl(var(--muted));
+}
+
+.dark .border-gray-200 {
+  border-color: hsl(var(--border));
+}
+
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark .text-gray-700 {
+  color: hsl(var(--foreground));
+}
+
+.dark .bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.dark .bg-red-50 {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.dark .bg-purple-50 {
+  background-color: rgba(147, 51, 234, 0.2);
+}
+
+.dark .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.dark .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Dark mode text fixes for better readability */
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #ffffff;
+}
+
+.dark .prose p,
+.dark .prose ul,
+.dark .prose ol,
+.dark .prose blockquote {
+  color: #e5e7eb;
+}
+
+.dark .prose strong {
+  color: #ffffff;
+}
+
+.dark .prose a {
+  color: #93c5fd;
+}
+
+.dark .prose code {
+  color: #e5e7eb;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .prose pre {
+  background-color: #1e293b;
+}
+
+.dark .prose pre code {
+  color: #e5e7eb;
+}
+
+.dark .prose figcaption {
+  color: #9ca3af;
+}
+
+.dark .prose blockquote {
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+.dark .prose hr {
+  border-color: #4b5563;
+}
+
+.dark .prose thead {
+  color: #ffffff;
+  border-bottom-color: #4b5563;
+}
+
+.dark .prose tbody tr {
+  border-bottom-color: #374151;
+}
